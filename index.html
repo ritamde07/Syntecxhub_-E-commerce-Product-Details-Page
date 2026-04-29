@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon/Flipkart Style E-commerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-logo" id="logoBtn">ShopHub</div>
+        <div class="nav-search">
+            <input type="text" placeholder="Search for products, brands and more">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="nav-links">
+            <span id="navSignIn">Hello, Sign in</span>
+            <span id="navOrders">Returns & Orders</span>
+            <span class="cart-icon" id="navCart">🛒 Cart <span id="cartCount" class="badge">0</span></span>
+        </div>
+    </header>
+
+    <nav class="sub-nav">
+        <span class="nav-category" data-category="Home">All / Home</span>
+        <span class="nav-category" data-category="Electronics">Electronics</span>
+        <span class="nav-category" data-category="Mobiles">Mobiles</span>
+        <span class="nav-category" data-category="Best Sellers">Best Sellers</span>
+        <span class="nav-category" data-category="Customer Service">Customer Service</span>
+    </nav>
+
+    <main id="categoryView" class="page-view" style="display: none;">
+        <h1 id="categoryTitle" class="section-title">Home Page</h1>
+        
+        <div class="product-grid" id="grid-Home">
+            <div class="product-card" onclick="viewProduct('sony_headphones')">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&auto=format&fit=crop" alt="Sony Headphones">
+                <h3>Sony WH-1000XM4 Headphones</h3>
+                <p class="card-rating">⭐⭐⭐⭐☆ 12,453</p>
+                <p class="card-price">$299.00 <span class="strikethrough">$349.00</span></p>
+            </div>
+            <div class="product-card" onclick="viewProduct('polaroid_camera')">
+                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=400&auto=format&fit=crop" alt="Camera">
+                <h3>Polaroid Instant Camera</h3>
+                <p class="card-rating">⭐⭐★★☆ 3,120</p>
+                <p class="card-price">$120.00</p>
+            </div>
+            <div class="product-card" onclick="viewProduct('fitness_watch')">
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=400&auto=format&fit=crop" alt="Watch">
+                <h3>Smart Fitness Watch</h3>
+                <p class="card-rating">⭐⭐⭐⭐☆ 5,640</p>
+                <p class="card-price">$199.00</p>
+            </div>
+        </div>
+
+        <div class="product-grid" id="grid-Mobiles" style="display: none;">
+            <div class="product-card" onclick="viewProduct('smartphone_pro')">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=400&auto=format&fit=crop" alt="Phone">
+                <h3>Smartphone Pro Max 256GB</h3>
+                <p class="card-rating">⭐⭐⭐⭐⭐ 8,902</p>
+                <p class="card-price">$999.00</p>
+            </div>
+            <div class="product-card" onclick="viewProduct('galaxy_android')">
+                <img src="https://images.unsplash.com/photo-1598327105666-5b89351cb315?q=80&w=400&auto=format&fit=crop" alt="Phone 2">
+                <h3>Galaxy Android 5G</h3>
+                <p class="card-rating">⭐⭐⭐⭐☆ 4,320</p>
+                <p class="card-price">$799.00</p>
+            </div>
+        </div>
+
+        <div class="product-grid" id="grid-BestSellers" style="display: none;">
+            <div class="product-card" onclick="viewProduct('wireless_earbuds')">
+                <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=400&auto=format&fit=crop" alt="Earbuds">
+                <h3>Wireless Earbuds Pro</h3>
+                <p class="card-rating">⭐⭐⭐⭐⭐ 45,902</p>
+                <p class="card-price">$149.00</p>
+            </div>
+            <div class="product-card" onclick="viewProduct('hd_tablet')">
+                <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=400&auto=format&fit=crop" alt="Tablet">
+                <h3>Tablet 10-inch HD</h3>
+                <p class="card-rating">⭐⭐⭐⭐⭐ 32,110</p>
+                <p class="card-price">$329.00</p>
+            </div>
+        </div>
+    </main>
+
+    <main id="customerServiceView" class="page-view" style="display: none;">
+        <h1 class="section-title">Hello. What can we help you with?</h1>
+        <hr class="divider">
+        <div class="cs-grid">
+            <div class="cs-box"><h3>📦 Your Orders</h3><p>Track packages, edit or cancel orders.</p></div>
+            <div class="cs-box"><h3>↩️ Returns & Refunds</h3><p>Return or exchange items.</p></div>
+            <div class="cs-box"><h3>💳 Payment Settings</h3><p>Add or edit payment methods.</p></div>
+            <div class="cs-box"><h3>🔒 Account Settings</h3><p>Change your email or password.</p></div>
+        </div>
+    </main>
+
+    <main id="productView" class="page-view">
+        <div class="breadcrumbs">
+            <span class="crumb-link" id="homeCrumb">Home</span> > <span id="crumbCategory">Electronics</span> > <span id="crumbTitle">Premium Wireless Headphones</span>
+        </div>
+
+        <div class="product-container">
+            <div class="product-gallery">
+                <div class="thumbnail-column">
+                    <img id="thumb1" class="thumbnail active" onclick="changeImage(this)">
+                    <img id="thumb2" class="thumbnail" onclick="changeImage(this)">
+                    <img id="thumb3" class="thumbnail" onclick="changeImage(this)">
+                </div>
+                <div class="main-image-container">
+                    <img alt="Product Image" id="mainImage">
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1 class="product-title" id="itemTitle">Product Title</h1>
+                
+                <div class="ratings">
+                    <span class="stars" id="itemRating">★★★★☆</span>
+                    <span class="rating-count" id="itemReviews">0 ratings</span>
+                    <span class="amazon-choice">ShopHub's <span>Choice</span></span>
+                </div>
+                <hr class="divider">
+
+                <div class="pricing-section">
+                    <div class="deal-price">
+                        <span class="currency">$</span><span class="price" id="itemPrice">0</span><span class="cents">00</span>
+                    </div>
+                    <div class="mrp">M.R.P.: <span class="strikethrough" id="itemMrp">$0.00</span></div>
+                    <p class="taxes-info">Inclusive of all taxes</p>
+                </div>
+
+                <div class="offers">
+                    <div class="offer-box">
+                        <strong>Bank Offer</strong>
+                        <p>Upto $15.00 discount on select Credit Cards</p>
+                    </div>
+                </div>
+                <hr class="divider">
+
+                <div class="variants">
+                    <div class="color-options">
+                        <div class="swatches">
+                            <button class="color-btn black active"></button>
+                            <button class="color-btn silver"></button>
+                            <button class="color-btn blue"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-features">
+                    <h3>About this item</h3>
+                    <ul id="itemFeatures">
+                        </ul>
+                </div>
+            </div>
+
+            <div class="buy-box">
+                <h2 class="buy-box-price">$<span id="buyBoxPrice">0.00</span></h2>
+                <p class="delivery">FREE delivery <strong>Tomorrow</strong>.</p>
+                <p class="location">📍 Deliver to Your Location</p>
+                <h3 class="stock-status">In Stock</h3>
+
+                <div class="quantity-selector">
+                    <label for="qty">Quantity: </label>
+                    <select id="qty">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <button id="addToCartBtn" class="btn btn-cart">Add to Cart</button>
+                <button id="buyNowBtn" class="btn btn-buy">Buy Now</button>
+                
+                <div class="secure-transaction">🔒 Secure transaction</div>
+            </div>
+        </div>
+    </main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeCart">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <hr class="divider">
+            <div id="cartItemsContainer"><p style="color: #565959; font-style: italic;">Your cart is currently empty.</p></div>
+            <hr class="divider">
+            <h3 style="text-align: right; margin-top: 10px;">Subtotal: $<span id="cartSubtotal">0.00</span></h3>
+            <button id="cartProceedBtn" class="btn btn-buy" style="margin-top: 15px; display: none;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeSignIn">&times;</span>
+            <h2>Sign in</h2>
+            <form id="signInForm">
+                <label>Email</label>
+                <input type="text" id="usernameInput" required placeholder="Enter your email">
+                <label>Password</label>
+                <input type="password" required placeholder="Enter password">
+                <button type="submit" class="btn btn-cart">Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="ordersModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeOrders">&times;</span>
+            <h2>Your Orders</h2>
+            <div class="order-item">
+                <p><strong>Order #114-9876543-12345</strong></p>
+                <p>Delivered on: April 10, 2026</p>
+                <p>Item: Logitech MX Master 3S</p>
+                <button class="btn btn-secondary">Return or Replace Items</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-btn" id="closeCheckout">&times;</span>
+            <h2>Checkout & Payment</h2>
+            <div class="checkout-grid">
+                <div class="shipping-info">
+                    <h3>1. Shipping Address</h3>
+                    <div class="address-box">
+                        <p><strong>Current User</strong></p>
+                        <p>North Dumdum, West Bengal 700081</p>
+                        <p>India</p>
+                    </div>
+                    <h3 style="margin-top: 20px;">2. Order Summary</h3>
+                    <p>Subtotal: $<span id="checkoutSubtotal">0.00</span></p>
+                    <p>Delivery: $0.00</p>
+                    <hr class="divider">
+                    <h3>Order Total: $<span id="checkoutTotal">0.00</span></h3>
+                </div>
+                <div class="payment-info">
+                    <h3>3. Payment Method</h3>
+                    <form id="paymentForm">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="XXXX XXXX XXXX XXXX" required maxlength="16">
+                        <div class="card-details">
+                            <div style="width: 50%;"><label>Expiry Date</label><input type="text" placeholder="MM/YY" required></div>
+                            <div style="width: 50%;"><label>CVV</label><input type="password" placeholder="123" required maxlength="3"></div>
+                        </div>
+                        <label>Name on Card</label>
+                        <input type="text" placeholder="John Doe" required>
+                        <button type="submit" class="btn btn-buy" id="finalPayBtn" style="margin-top: 15px;">Place Your Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
